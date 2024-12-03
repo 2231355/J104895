@@ -1,0 +1,63 @@
+﻿@page
+@model J104895.Pages.CheckoutModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Checkout</h1>
+    <p class="lead">Please review your order and fill out your details.</p>
+</div>
+
+@if (Model.CartItems.Count > 0)
+{
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Your Order</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Quantity</td>
+                            <td>$@(item.Price * item.Quantity)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <h4 class="text-end">Order Total: $@Model.CartItems.Sum(i => i.Price * i.Quantity)</h4>
+        </div>
+        <div class="col-md-4">
+            <h4>Billing Details</h4>
+            <form method="post">
+                <div class="mb-3">
+                    <label for="Name" class="form-label">Name</label>
+                    <input type="text" id="Name" name="Name" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label for="Email" class="form-label">Email</label>
+                    <input type="email" id="Email" name="Email" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label for="Address" class="form-label">Address</label>
+                    <textarea id="Address" name="Address" class="form-control" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success btn-lg w-100">Place Order</button>
+            </form>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-info text-center">
+        Your cart is empty. <a asp-page="/Menu">Go back to Menu</a>.
+    </div>
+}

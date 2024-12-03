@@ -1,0 +1,34 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home - Restaurant";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Kontena Kitani!</h1>
+    <p class="lead">Our best-selling foods in the town!</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="~/images/food1.jpg" alt="Dish 1" class="img-fluid rounded shadow-sm" />
+        <h5 class="mt-2">Buttermilk With Butter Egg</h5>
+    </div>
+    <div class="col-md-4">
+        <img src="~/images/food2.jpg" alt="Dish 2" class="img-fluid rounded shadow-sm" />
+        <h5 class="mt-2">Pop-up Beef Burger</h5>
+    </div>
+    <div class="col-md-4">
+        <img src="~/images/food3.jpg" alt="Dish 3" class="img-fluid rounded shadow-sm" />
+        <h5 class="mt-2">Mee Goreng</h5>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a asp-page="/Menu" class="btn btn-primary btn-lg">Our Menu</a>
+</div>
+
+
+<a href="/User">User</a><br />
+<a href="/Admin">Admin</a><br />
+<a href="/Client">Client</a><br />

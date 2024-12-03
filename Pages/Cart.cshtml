@@ -1,0 +1,59 @@
+﻿@page
+@model J104895.Pages.CartModel
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Your Cart</h1>
+    <p class="lead">Review your selected items before checkout.</p>
+</div>
+
+@if (Model.CartItems.Count > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CartItems)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>$@item.Price</td>
+                    <td>
+                        <form method="post" asp-page-handler="UpdateQuantity">
+                            <input type="hidden" name="itemName" value="@item.Name" />
+                            <input type="number" name="quantity" value="@item.Quantity" min="1" class="form-control d-inline-block" style="width: 70px;" />
+                            <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                        </form>
+                    </td>
+                    <td>$@(item.Price * item.Quantity)</td>
+                    <td>
+                        <form method="post" asp-page-handler="RemoveItem">
+                            <input type="hidden" name="itemName" value="@item.Name" />
+                            <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-end">
+        <h4>Total: $@Model.CartItems.Sum(i => i.Price * i.Quantity)</h4>
+        <a href="/Checkout" class="btn btn-success btn-lg">Proceed to Checkout</a>
+    </div>
+}
+else
+{
+    <div class="alert alert-info text-center">
+        Your cart is empty. <a asp-page="/Menu">Continue shopping</a>.
+    </div>
+}

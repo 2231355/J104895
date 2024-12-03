@@ -1,0 +1,45 @@
+﻿@page
+@model J104895.Pages.MenuModel
+@{
+    ViewData["Title"] = "Menu";
+}
+
+<div class="text-center mb-4">
+    <h1 class="display-4">Our Menu</h1>
+    <form method="get" class="form-inline justify-content-center">
+        <input type="text" name="searchQuery" class="form-control w-50" placeholder="Search for food..." value="@Model.SearchQuery" />
+        <button type="submit" class="btn btn-primary ml-2">Search</button>
+    </form>
+</div>
+
+@if (!Model.MenuItems.Any())
+{
+    <p class="text-center text-muted">No items found.</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var item in Model.MenuItems)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="~/images/@item.Image" class="card-img-top" alt="@item.Name" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description</p>
+                        <p class="card-text"><strong>Price: </strong> $@item.Price</p>
+                        <form method="post">
+                            <input type="hidden" name="itemName" value="@item.Name" />
+                            <input type="hidden" name="itemPrice" value="@item.Price" />
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<div class="text-center mt-4">
+    <a asp-page="/Cart" class="btn btn-success btn-lg">Go to Cart</a>
+</div>

@@ -1,0 +1,13 @@
+﻿@page
+@model J104895.Pages.OrderConfirmationModel
+@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Thank You!</h1>
+    <p class="lead">Your order has been placed successfully.</p>
+    <p><strong>Name:</strong> @TempData["Name"]</p>
+    <p><strong>Order Total:</strong> $@TempData["OrderTotal"]</p>
+    <a asp-page="/Menu" class="btn btn-primary btn-lg">Back to Menu</a>
+</div>
